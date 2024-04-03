@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 /** Instance used when records are not supported */
 public class RecordNotSupportedHelper extends RecordHelper {
 
+  private static final String ERRORMSG = "Records are not supported on this JVM, this method should not be called";
   @Override
   boolean isRecord(Class<?> clazz) {
     return false;
@@ -14,19 +15,16 @@ public class RecordNotSupportedHelper extends RecordHelper {
 
   @Override
   String[] getRecordComponentNames(Class<?> clazz) {
-    throw new UnsupportedOperationException(
-        "Records are not supported on this JVM, this method should not be called");
+    throw new UnsupportedOperationException(ERRORMSG);
   }
 
   @Override
   <T> Constructor<T> getCanonicalRecordConstructor(Class<T> raw) {
-    throw new UnsupportedOperationException(
-        "Records are not supported on this JVM, this method should not be called");
+    throw new UnsupportedOperationException(ERRORMSG);
   }
 
   @Override
   public Method getAccessor(Class<?> raw, Field field) {
-    throw new UnsupportedOperationException(
-        "Records are not supported on this JVM, this method should not be called");
+    throw new UnsupportedOperationException(ERRORMSG);
   }
 }
