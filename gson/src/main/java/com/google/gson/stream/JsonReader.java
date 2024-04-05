@@ -542,7 +542,8 @@ public class JsonReader implements Closeable {
       int c = nextNonWhitespace(true);
       switch (c) {
         case ']':
-          return peeked = PEEKED_END_ARRAY;
+          peeked = PEEKED_END_ARRAY;
+          return peeked;
         case ';':
           checkLenient(); // fall-through
         case ',':
@@ -557,7 +558,8 @@ public class JsonReader implements Closeable {
         int c = nextNonWhitespace(true);
         switch (c) {
           case '}':
-            return peeked = PEEKED_END_OBJECT;
+            peeked = PEEKED_END_OBJECT;
+            return peeked;
           case ';':
             checkLenient(); // fall-through
           case ',':
@@ -569,13 +571,16 @@ public class JsonReader implements Closeable {
       int c = nextNonWhitespace(true);
       switch (c) {
         case '"':
-          return peeked = PEEKED_DOUBLE_QUOTED_NAME;
+          peeked = PEEKED_DOUBLE_QUOTED_NAME;
+          return peeked;
         case '\'':
           checkLenient();
-          return peeked = PEEKED_SINGLE_QUOTED_NAME;
+          peeked = PEEKED_SINGLE_QUOTED_NAME;
+          return peeked;
         case '}':
           if (peekStack != JsonScope.NONEMPTY_OBJECT) {
-            return peeked = PEEKED_END_OBJECT;
+            peeked = PEEKED_END_OBJECT;
+            return peeked;
           } else {
             throw syntaxError("Expected name");
           }
@@ -583,7 +588,8 @@ public class JsonReader implements Closeable {
           checkLenient();
           pos--; // Don't consume the first character in an unquoted string.
           if (isLiteral((char) c)) {
-            return peeked = PEEKED_UNQUOTED_NAME;
+            peeked = PEEKED_UNQUOTED_NAME;
+            return peeked;
           } else {
             throw syntaxError("Expected name");
           }
@@ -612,7 +618,8 @@ public class JsonReader implements Closeable {
     } else if (peekStack == JsonScope.NONEMPTY_DOCUMENT) {
       int c = nextNonWhitespace(false);
       if (c == -1) {
-        return peeked = PEEKED_EOF;
+        peeked = PEEKED_EOF;
+        return peeked;
       } else {
         checkLenient();
         pos--;
@@ -625,7 +632,8 @@ public class JsonReader implements Closeable {
     switch (c) {
       case ']':
         if (peekStack == JsonScope.EMPTY_ARRAY) {
-          return peeked = PEEKED_END_ARRAY;
+          peeked = PEEKED_END_ARRAY;
+          return peeked;
         }
         // fall-through to handle ",]"
       case ';':
@@ -634,19 +642,24 @@ public class JsonReader implements Closeable {
         if (peekStack == JsonScope.EMPTY_ARRAY || peekStack == JsonScope.NONEMPTY_ARRAY) {
           checkLenient();
           pos--;
-          return peeked = PEEKED_NULL;
+          peeked = PEEKED_NULL;
+          return peeked;
         } else {
           throw syntaxError("Unexpected value");
         }
       case '\'':
         checkLenient();
-        return peeked = PEEKED_SINGLE_QUOTED;
+        peeked = PEEKED_SINGLE_QUOTED;
+        return peeked;
       case '"':
-        return peeked = PEEKED_DOUBLE_QUOTED;
+        peeked = PEEKED_DOUBLE_QUOTED;
+        return peeked;
       case '[':
-        return peeked = PEEKED_BEGIN_ARRAY;
+        peeked = PEEKED_BEGIN_ARRAY;
+        return peeked;
       case '{':
-        return peeked = PEEKED_BEGIN_OBJECT;
+        peeked = PEEKED_BEGIN_OBJECT;
+        return peeked;
       default:
         pos--; // Don't consume the first character in a literal value.
     }
@@ -666,7 +679,8 @@ public class JsonReader implements Closeable {
     }
 
     checkLenient();
-    return peeked = PEEKED_UNQUOTED;
+    peeked = PEEKED_UNQUOTED;
+    return peeked;
   }
 
   private int peekKeyword() throws IOException {
@@ -715,7 +729,8 @@ public class JsonReader implements Closeable {
 
     // We've found the keyword followed either by EOF or by a non-literal character.
     pos += length;
-    return peeked = peeking;
+    peeked = peeking;
+    return peeked;
   }
 
   private int peekNumber() throws IOException {
@@ -817,12 +832,14 @@ public class JsonReader implements Closeable {
         && (value != 0 || !negative)) {
       peekedLong = negative ? value : -value;
       pos += i;
-      return peeked = PEEKED_LONG;
+      peeked = PEEKED_LONG;
+      return peeked;
     } else if (last == NUMBER_CHAR_DIGIT
         || last == NUMBER_CHAR_FRACTION_DIGIT
         || last == NUMBER_CHAR_EXP_DIGIT) {
       peekedNumberLength = i;
-      return peeked = PEEKED_NUMBER;
+      peeked = PEEKED_NUMBER;
+      return peeked;
     } else {
       return PEEKED_NONE;
     }
