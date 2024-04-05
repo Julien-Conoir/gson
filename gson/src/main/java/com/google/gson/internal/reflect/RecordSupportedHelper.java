@@ -23,7 +23,7 @@ public class RecordSupportedHelper extends RecordHelper {
 
   private static RuntimeException createExceptionForRecordReflectionException(
       ReflectiveOperationException exception) {
-    throw new RuntimeException(
+    throw new RecordException(
         "Unexpected ReflectiveOperationException occurred"
             + " (Gson "
             + GsonBuildConfig.VERSION

@@ -198,7 +198,7 @@ public class ReflectionHelper {
 
   public static RuntimeException createExceptionForUnexpectedIllegalAccess(
       IllegalAccessException exception) {
-    throw new RuntimeException(
+    throw new RecordException(
         "Unexpected IllegalAccessException occurred (Gson "
             + GsonBuildConfig.VERSION
             + "). Certain ReflectionAccessFilter features require Java >= 9 to work correctly. If"
