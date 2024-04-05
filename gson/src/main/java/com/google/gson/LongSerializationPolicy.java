@@ -16,6 +16,10 @@
 
 package com.google.gson;
 
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonNull;
+import com.google.gson.jsonelement.JsonPrimitive;
+
 /**
  * Defines the expected format for a {@code long} or {@code Long} type when it is serialized.
  *

@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.google.gson;
+package com.google.gson.jsonelement;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.gson.internal.NonNullElementWrapperList;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;

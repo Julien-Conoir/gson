@@ -18,6 +18,8 @@ package com.google.gson;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonPrimitive;
 import org.junit.Test;
 
 /**

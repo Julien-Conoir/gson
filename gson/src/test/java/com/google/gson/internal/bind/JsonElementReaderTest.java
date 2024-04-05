@@ -19,9 +19,9 @@ package com.google.gson.internal.bind;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
 
-import com.google.gson.JsonElement;
+import com.google.gson.jsonelement.JsonElement;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.jsonelement.JsonPrimitive;
 import com.google.gson.Strictness;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.MalformedJsonException;

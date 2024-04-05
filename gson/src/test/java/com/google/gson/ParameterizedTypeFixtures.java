@@ -19,6 +19,9 @@ package com.google.gson;
 import com.google.common.base.Objects;
 import com.google.gson.internal.$Gson$Types;
 import com.google.gson.internal.Primitives;
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonObject;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

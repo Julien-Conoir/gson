@@ -21,6 +21,8 @@ import static org.junit.Assert.assertThrows;
 
 import com.google.gson.Gson.FutureTypeAdapter;
 import com.google.gson.internal.Excluder;
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonPrimitive;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;

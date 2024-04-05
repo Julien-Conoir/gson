@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.google.gson;
+package com.google.gson.jsonelement;
 
 import com.google.gson.internal.LazilyParsedNumber;
 import com.google.gson.internal.NumberLimits;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Objects;

@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.google.gson;
+package com.google.gson.jsonelement;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
 
 import com.google.common.testing.EqualsTester;
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 import com.google.gson.common.MoreAsserts;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayDeque;
@@ -31,6 +33,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import com.google.gson.jsonelement.*;
 import org.junit.Test;
 
 /**

@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.google.gson;
+package com.google.gson.jsonelement;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.gson.internal.LinkedTreeMap;
+
 import java.util.Map;
 import java.util.Set;
 

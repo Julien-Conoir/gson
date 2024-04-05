@@ -16,9 +16,9 @@
 
 package com.google.gson.internal;
 
-import com.google.gson.JsonElement;
+import com.google.gson.jsonelement.JsonElement;
 import com.google.gson.JsonIOException;
-import com.google.gson.JsonNull;
+import com.google.gson.jsonelement.JsonNull;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.internal.bind.TypeAdapters;

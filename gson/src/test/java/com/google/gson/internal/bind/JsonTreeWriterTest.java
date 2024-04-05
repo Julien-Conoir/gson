@@ -20,8 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonNull;
 import com.google.gson.Strictness;
 import com.google.gson.common.MoreAsserts;
 import com.google.gson.stream.JsonWriter;

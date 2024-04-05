@@ -20,9 +20,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonObject;
+import com.google.gson.jsonelement.JsonPrimitive;
 import com.google.gson.common.TestTypes.BagOfPrimitives;
 import java.util.Map;
 import java.util.Map.Entry;
