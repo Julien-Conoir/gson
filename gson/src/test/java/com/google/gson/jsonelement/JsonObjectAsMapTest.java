@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.gson;
+package com.google.gson.jsonelement;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
@@ -30,6 +30,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonNull;
+import com.google.gson.jsonelement.JsonObject;
+import com.google.gson.jsonelement.JsonPrimitive;
 import org.junit.Test;
 
 /** Tests for {@link JsonObject#asMap()}. */

@@ -18,10 +18,10 @@ package com.google.gson.typeadapters;
 
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.jsonelement.JsonPrimitive;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;

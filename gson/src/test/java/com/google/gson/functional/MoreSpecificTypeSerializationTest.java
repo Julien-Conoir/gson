@@ -19,7 +19,7 @@ package com.google.gson.functional;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.jsonelement.JsonObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;

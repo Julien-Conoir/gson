@@ -20,6 +20,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.fail;
 
+import com.google.gson.jsonelement.JsonArray;
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonPrimitive;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;

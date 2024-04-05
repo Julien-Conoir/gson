@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.gson;
+package com.google.gson.jsonelement;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertThrows;
@@ -23,6 +23,7 @@ import com.google.gson.common.MoreAsserts;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import org.junit.Test;
 
 /** Tests for {@link JsonArray#asList()}. */

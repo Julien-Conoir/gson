@@ -18,10 +18,10 @@ package com.google.gson.internal.bind;
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonNull;
-import com.google.gson.JsonObject;
+import com.google.gson.jsonelement.JsonArray;
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonNull;
+import com.google.gson.jsonelement.JsonObject;
 import com.google.gson.common.MoreAsserts;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;

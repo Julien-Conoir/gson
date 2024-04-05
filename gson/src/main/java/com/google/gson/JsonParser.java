@@ -17,6 +17,7 @@ package com.google.gson;
 
 import com.google.errorprone.annotations.InlineMe;
 import com.google.gson.internal.Streams;
+import com.google.gson.jsonelement.JsonElement;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.MalformedJsonException;

@@ -18,6 +18,8 @@ package com.google.gson;
 
 import com.google.gson.internal.bind.JsonTreeReader;
 import com.google.gson.internal.bind.JsonTreeWriter;
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonNull;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;

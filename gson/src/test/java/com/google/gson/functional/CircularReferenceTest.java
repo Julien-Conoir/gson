@@ -20,8 +20,8 @@ import static org.junit.Assert.fail;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.jsonelement.JsonElement;
+import com.google.gson.jsonelement.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.common.TestTypes.ClassOverridingEquals;

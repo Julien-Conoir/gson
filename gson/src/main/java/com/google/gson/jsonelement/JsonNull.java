@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.gson;
+package com.google.gson.jsonelement;
 
 /**
  * A class representing a JSON {@code null} value.
