@@ -116,6 +116,9 @@ public final class GsonBuilder {
   private ToNumberStrategy objectToNumberStrategy = DEFAULT_OBJECT_TO_NUMBER_STRATEGY;
   private ToNumberStrategy numberToNumberStrategy = DEFAULT_NUMBER_TO_NUMBER_STRATEGY;
   private final ArrayDeque<ReflectionAccessFilter> reflectionFilters = new ArrayDeque<>();
+  private static final int DATEFORMATSHORT = 3;
+  private static final int DATEFORMATFULL = 0;
+
 
   /**
    * Creates a GsonBuilder instance that can be used to build Gson with various configuration
@@ -670,7 +673,7 @@ public final class GsonBuilder {
 
   private static int checkDateFormatStyle(int style) {
     // Valid DateFormat styles are: 0, 1, 2, 3 (FULL, LONG, MEDIUM, SHORT)
-    if (style < 0 || style > 3) {
+    if (style < DATEFORMATFULL || style > DATEFORMATSHORT) {
       throw new IllegalArgumentException("Invalid style: " + style);
     }
     return style;
