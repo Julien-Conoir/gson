@@ -324,14 +324,17 @@ public abstract class JsonElement {
   /** Returns a String representation of this element. */
   @Override
   public String toString() {
+    StringWriter stringWriter = this.toJsonString();
+    return stringWriter.toString();
+  }
+
+  private StringWriter toJsonString() {
     try {
       StringWriter stringWriter = new StringWriter();
       JsonWriter jsonWriter = new JsonWriter(stringWriter);
-      // Make writer lenient because toString() must not fail, even if for example JsonPrimitive
-      // contains NaN
       jsonWriter.setStrictness(Strictness.LENIENT);
       Streams.write(this, jsonWriter);
-      return stringWriter.toString();
+      return stringWriter;
     } catch (IOException e) {
       throw new AssertionError(e);
     }
