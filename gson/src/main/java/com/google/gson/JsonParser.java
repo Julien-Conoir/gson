@@ -113,12 +113,10 @@ public final class JsonParser {
         throw new JsonSyntaxException("Did not consume the entire document.");
       }
       return element;
-    } catch (MalformedJsonException e) {
+    } catch (MalformedJsonException | NumberFormatException e) {
       throw new JsonSyntaxException(e);
     } catch (IOException e) {
       throw new JsonIOException(e);
-    } catch (NumberFormatException e) {
-      throw new JsonSyntaxException(e);
     }
   }
 
