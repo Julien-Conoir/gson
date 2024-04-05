@@ -167,79 +167,6 @@ public class TypeToken<T> {
     return type;
   }
 
-  /**
-   * Check if this type is assignable from the given class object.
-   *
-   * @deprecated this implementation may be inconsistent with javac for types with wildcards.
-   */
-  @Deprecated
-  public boolean isAssignableFrom(Class<?> cls) {
-    return isAssignableFrom((Type) cls);
-  }
-
-  /**
-   * Check if this type is assignable from the given Type.
-   *
-   * @deprecated this implementation may be inconsistent with javac for types with wildcards.
-   */
-  @Deprecated
-  public boolean isAssignableFrom(Type from) {
-    if (from == null) {
-      return false;
-    }
-
-    if (type.equals(from)) {
-      return true;
-    }
-
-    if (type instanceof Class<?>) {
-      return rawType.isAssignableFrom($Gson$Types.getRawType(from));
-    } else if (type instanceof ParameterizedType) {
-      return isAssignableFrom(from, (ParameterizedType) type, new HashMap<String, Type>());
-    } else if (type instanceof GenericArrayType) {
-      return rawType.isAssignableFrom($Gson$Types.getRawType(from))
-          && isAssignableFrom(from, (GenericArrayType) type);
-    } else {
-      throw buildUnsupportedTypeException(
-          type, Class.class, ParameterizedType.class, GenericArrayType.class);
-    }
-  }
-
-  /**
-   * Check if this type is assignable from the given type token.
-   *
-   * @deprecated this implementation may be inconsistent with javac for types with wildcards.
-   */
-  @Deprecated
-  public boolean isAssignableFrom(TypeToken<?> token) {
-    return isAssignableFrom(token.getType());
-  }
-
-  /**
-   * Private helper function that performs some assignability checks for the provided
-   * GenericArrayType.
-   */
-  private static boolean isAssignableFrom(Type from, GenericArrayType to) {
-    Type toGenericComponentType = to.getGenericComponentType();
-    if (toGenericComponentType instanceof ParameterizedType) {
-      Type t = from;
-      if (from instanceof GenericArrayType) {
-        t = ((GenericArrayType) from).getGenericComponentType();
-      } else if (from instanceof Class<?>) {
-        Class<?> classType = (Class<?>) from;
-        while (classType.isArray()) {
-          classType = classType.getComponentType();
-        }
-        t = classType;
-      }
-      return isAssignableFrom(
-          t, (ParameterizedType) toGenericComponentType, new HashMap<String, Type>());
-    }
-    // No generic defined on "to"; therefore, return true and let other
-    // checks determine assignability
-    return true;
-  }
-
   /** Private recursive helper function to actually do the type-safe checking of assignability. */
   private static boolean isAssignableFrom(
       Type from, ParameterizedType to, Map<String, Type> typeVarMap) {
@@ -307,23 +234,6 @@ public class TypeToken<T> {
       return true;
     }
     return false;
-  }
-
-  private static IllegalArgumentException buildUnsupportedTypeException(
-      Type token, Class<?>... expected) {
-
-    // Build exception message
-    StringBuilder exceptionMessage = new StringBuilder("Unsupported type, expected one of: ");
-    for (Class<?> clazz : expected) {
-      exceptionMessage.append(clazz.getName()).append(", ");
-    }
-    exceptionMessage
-        .append("but got: ")
-        .append(token.getClass().getName())
-        .append(", for type token: ")
-        .append(token.toString());
-
-    return new IllegalArgumentException(exceptionMessage.toString());
   }
 
   /**
