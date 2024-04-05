@@ -73,21 +73,21 @@ public final class JsonTreeWriter extends JsonWriter {
     return product;
   }
 
-  private JsonElement peek() {
+  private JsonElement glance() {
     return stack.get(stack.size() - 1);
   }
 
   private void put(JsonElement value) {
     if (pendingName != null) {
       if (!value.isJsonNull() || getSerializeNulls()) {
-        JsonObject object = (JsonObject) peek();
+        JsonObject object = (JsonObject) glance();
         object.add(pendingName, value);
       }
       pendingName = null;
     } else if (stack.isEmpty()) {
       product = value;
     } else {
-      JsonElement element = peek();
+      JsonElement element = glance();
       if (element instanceof JsonArray) {
         ((JsonArray) element).add(value);
       } else {
@@ -111,7 +111,7 @@ public final class JsonTreeWriter extends JsonWriter {
     if (stack.isEmpty() || pendingName != null) {
       throw new IllegalStateException();
     }
-    JsonElement element = peek();
+    JsonElement element = glance();
     if (element instanceof JsonArray) {
       stack.remove(stack.size() - 1);
       return this;
@@ -134,7 +134,7 @@ public final class JsonTreeWriter extends JsonWriter {
     if (stack.isEmpty() || pendingName != null) {
       throw new IllegalStateException();
     }
-    JsonElement element = peek();
+    JsonElement element = glance();
     if (element instanceof JsonObject) {
       stack.remove(stack.size() - 1);
       return this;
@@ -149,7 +149,7 @@ public final class JsonTreeWriter extends JsonWriter {
     if (stack.isEmpty() || pendingName != null) {
       throw new IllegalStateException("Did not expect a name");
     }
-    JsonElement element = peek();
+    JsonElement element = glance();
     if (element instanceof JsonObject) {
       pendingName = name;
       return this;
