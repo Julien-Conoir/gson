@@ -960,30 +960,18 @@ public final class TypeAdapters {
 
     public EnumTypeAdapter(final Class<T> classOfT) {
       try {
-        // Uses reflection to find enum constants to work around name mismatches for obfuscated
-        // classes
-        // Reflection access might throw SecurityException, therefore run this in privileged
-        // context; should be acceptable because this only retrieves enum constants, but does not
-        // expose anything else
-        Field[] constantFields =
-            AccessController.doPrivileged(
-                new PrivilegedAction<Field[]>() {
-                  @Override
-                  public Field[] run() {
-                    Field[] fields = classOfT.getDeclaredFields();
-                    ArrayList<Field> constantFieldsList = new ArrayList<>(fields.length);
-                    for (Field f : fields) {
-                      if (f.isEnumConstant()) {
-                        constantFieldsList.add(f);
-                      }
-                    }
+          Field[] fields = classOfT.getDeclaredFields();
+          ArrayList<Field> constantFieldsList = new ArrayList<>(fields.length);
+          for (Field f : fields) {
+              if (f.isEnumConstant()) {
+                  f.setAccessible(true);
+                  constantFieldsList.add(f);
+              }
+          }
 
-                    Field[] constantFields = constantFieldsList.toArray(new Field[0]);
-                    AccessibleObject.setAccessible(constantFields, true);
-                    return constantFields;
-                  }
-                });
-        for (Field constantField : constantFields) {
+          Field[] constantFields = constantFieldsList.toArray(new Field[0]);
+
+          for (Field constantField : constantFields) {
           @SuppressWarnings("unchecked")
           T constant = (T) constantField.get(null);
           String name = constant.name();
