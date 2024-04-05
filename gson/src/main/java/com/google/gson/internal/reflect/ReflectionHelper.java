@@ -24,6 +24,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Objects;
 
 public class ReflectionHelper {
 
@@ -45,7 +46,7 @@ public class ReflectionHelper {
 
   private static String getInaccessibleTroubleshootingSuffix(Exception e) {
     // Class was added in Java 9, therefore cannot use instanceof
-    if (e.getClass().getName().equals("java.lang.reflect.InaccessibleObjectException")) {
+    if (Objects.equals(e.getClass().getName(), "java.lang.reflect.InaccessibleObjectException")) {
       String message = e.getMessage();
       String troubleshootingId =
           message != null && message.contains("to module com.google.gson")
