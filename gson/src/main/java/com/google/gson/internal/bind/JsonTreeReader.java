@@ -230,11 +230,7 @@ public final class JsonTreeReader extends JsonReader {
 
   @Override
   public double nextDouble() throws IOException {
-    JsonToken token = peek();
-    if (token != JsonToken.NUMBER && token != JsonToken.STRING) {
-      throw new IllegalStateException(
-          "Expected " + JsonToken.NUMBER + " but was " + token + locationString());
-    }
+    verifyNextTokenIsNumberOrString();
     double result = ((JsonPrimitive) peekStack()).getAsDouble();
     if (!isLenient() && (Double.isNaN(result) || Double.isInfinite(result))) {
       throw new MalformedJsonException("JSON forbids NaN and infinities: " + result);
@@ -248,11 +244,7 @@ public final class JsonTreeReader extends JsonReader {
 
   @Override
   public long nextLong() throws IOException {
-    JsonToken token = peek();
-    if (token != JsonToken.NUMBER && token != JsonToken.STRING) {
-      throw new IllegalStateException(
-          "Expected " + JsonToken.NUMBER + " but was " + token + locationString());
-    }
+    verifyNextTokenIsNumberOrString();
     long result = ((JsonPrimitive) peekStack()).getAsLong();
     popStack();
     if (stackSize > 0) {
@@ -263,11 +255,7 @@ public final class JsonTreeReader extends JsonReader {
 
   @Override
   public int nextInt() throws IOException {
-    JsonToken token = peek();
-    if (token != JsonToken.NUMBER && token != JsonToken.STRING) {
-      throw new IllegalStateException(
-          "Expected " + JsonToken.NUMBER + " but was " + token + locationString());
-    }
+    verifyNextTokenIsNumberOrString();
     int result = ((JsonPrimitive) peekStack()).getAsInt();
     popStack();
     if (stackSize > 0) {
@@ -382,5 +370,13 @@ public final class JsonTreeReader extends JsonReader {
 
   private String locationString() {
     return " at path " + getPath();
+  }
+
+  private void verifyNextTokenIsNumberOrString() throws IOException {
+    JsonToken token = peek();
+    if (token != JsonToken.NUMBER && token != JsonToken.STRING) {
+      throw new IllegalStateException(
+              "Expected " + JsonToken.NUMBER + " but was " + token + locationString());
+    }
   }
 }
