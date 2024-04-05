@@ -23,7 +23,7 @@ public final class JavaVersion {
   // However, many alternate implementations differ. For example, Debian used 9-debian as the
   // version string
 
-  private static final int majorJavaVersion = determineMajorJavaVersion();
+  private static final int MAJORJAVAVERSION = determineMajorJavaVersion();
 
   private static int determineMajorJavaVersion() {
     String javaVersion = System.getProperty("java.version");
@@ -80,7 +80,7 @@ public final class JavaVersion {
    * @return the major Java version, i.e. '8' for Java 1.8, '9' for Java 9 etc.
    */
   public static int getMajorJavaVersion() {
-    return majorJavaVersion;
+    return MAJORJAVAVERSION;
   }
 
   /**
@@ -90,7 +90,7 @@ public final class JavaVersion {
    *     otherwise.
    */
   public static boolean isJava9OrLater() {
-    return majorJavaVersion >= 9;
+    return MAJORJAVAVERSION >= 9;
   }
 
   private JavaVersion() {}
