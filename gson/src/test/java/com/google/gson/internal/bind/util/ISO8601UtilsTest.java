@@ -26,6 +26,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import com.google.gson.internal.bind.ISO8601Utils;
 import org.junit.Test;
 
 public class ISO8601UtilsTest {
