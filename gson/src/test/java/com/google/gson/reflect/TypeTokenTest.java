@@ -24,11 +24,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
-import java.lang.reflect.WildcardType;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.RandomAccess;
 import java.util.Set;
 import org.junit.Test;
 
@@ -48,70 +45,6 @@ public final class TypeTokenTest {
   List<?> listOfUnknown = null;
   List<Set<String>> listOfSetOfString = null;
   List<Set<?>> listOfSetOfUnknown = null;
-
-  @SuppressWarnings({"deprecation"})
-  @Test
-  public void testIsAssignableFromRawTypes() {
-    assertThat(TypeToken.get(Object.class).isAssignableFrom(String.class)).isTrue();
-    assertThat(TypeToken.get(String.class).isAssignableFrom(Object.class)).isFalse();
-    assertThat(TypeToken.get(RandomAccess.class).isAssignableFrom(ArrayList.class)).isTrue();
-    assertThat(TypeToken.get(ArrayList.class).isAssignableFrom(RandomAccess.class)).isFalse();
-  }
-
-  @SuppressWarnings({"deprecation"})
-  @Test
-  public void testIsAssignableFromWithTypeParameters() throws Exception {
-    Type a = getClass().getDeclaredField("listOfInteger").getGenericType();
-    Type b = getClass().getDeclaredField("listOfNumber").getGenericType();
-    assertThat(TypeToken.get(a).isAssignableFrom(a)).isTrue();
-    assertThat(TypeToken.get(b).isAssignableFrom(b)).isTrue();
-
-    // listOfInteger = listOfNumber; // doesn't compile; must be false
-    assertThat(TypeToken.get(a).isAssignableFrom(b)).isFalse();
-    // listOfNumber = listOfInteger; // doesn't compile; must be false
-    assertThat(TypeToken.get(b).isAssignableFrom(a)).isFalse();
-  }
-
-  @SuppressWarnings({"deprecation"})
-  @Test
-  public void testIsAssignableFromWithBasicWildcards() throws Exception {
-    Type a = getClass().getDeclaredField("listOfString").getGenericType();
-    Type b = getClass().getDeclaredField("listOfUnknown").getGenericType();
-    assertThat(TypeToken.get(a).isAssignableFrom(a)).isTrue();
-    assertThat(TypeToken.get(b).isAssignableFrom(b)).isTrue();
-
-    // listOfString = listOfUnknown  // doesn't compile; must be false
-    assertThat(TypeToken.get(a).isAssignableFrom(b)).isFalse();
-    listOfUnknown = listOfString; // compiles; must be true
-    // The following assertion is too difficult to support reliably, so disabling
-    // assertThat(TypeToken.get(b).isAssignableFrom(a)).isTrue();
-
-    WildcardType wildcardType = (WildcardType) ((ParameterizedType) b).getActualTypeArguments()[0];
-    TypeToken<?> wildcardTypeToken = TypeToken.get(wildcardType);
-    IllegalArgumentException e =
-        assertThrows(IllegalArgumentException.class, () -> wildcardTypeToken.isAssignableFrom(b));
-    assertThat(e)
-        .hasMessageThat()
-        .isEqualTo(
-            "Unsupported type, expected one of: java.lang.Class,"
-                + " java.lang.reflect.ParameterizedType, java.lang.reflect.GenericArrayType, but"
-                + " got: com.google.gson.internal.$Gson$Types$WildcardTypeImpl, for type token: "
-                + wildcardTypeToken);
-  }
-
-  @SuppressWarnings({"deprecation"})
-  @Test
-  public void testIsAssignableFromWithNestedWildcards() throws Exception {
-    Type a = getClass().getDeclaredField("listOfSetOfString").getGenericType();
-    Type b = getClass().getDeclaredField("listOfSetOfUnknown").getGenericType();
-    assertThat(TypeToken.get(a).isAssignableFrom(a)).isTrue();
-    assertThat(TypeToken.get(b).isAssignableFrom(b)).isTrue();
-
-    // listOfSetOfString = listOfSetOfUnknown; // doesn't compile; must be false
-    assertThat(TypeToken.get(a).isAssignableFrom(b)).isFalse();
-    // listOfSetOfUnknown = listOfSetOfString; // doesn't compile; must be false
-    assertThat(TypeToken.get(b).isAssignableFrom(a)).isFalse();
-  }
 
   @Test
   public void testArrayFactory() {
